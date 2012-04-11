@@ -4,7 +4,7 @@
 (function($) {
 
 var methods = {
-  init: function(options) {
+  'init': function(options) {
     var options = $.extend({ title: 'No title' }, options);
     return this.each(function() {
       var $this = $(this);
@@ -13,11 +13,13 @@ var methods = {
       }
       $this.svg();
       $this.svg('get').load(options.mapURL, { changeSize: true });
-      loadItems($this, options.itemsURL);
+      loadAreas($this, options.areasURL);
     });
   },
 
-  title: function(title) {
+  // Set map title
+  //
+  'title': function(title) {
     if (title) {
       return $(this).attr('title', title);
     } else {
@@ -31,7 +33,7 @@ var methods = {
   //  max     the maximum value (will be rounded according to levels)
   //  levels  number of levels in the gradient
   //
-  legend: function(options) {
+  'legend': function(options) {
     var $this = $(this);
     var svg = $this.svg('get');
     var elt = $this.find('#legende');
@@ -86,17 +88,17 @@ var methods = {
     return $this.data('legend', legend);
   },
 
-  // Find item by attribute value or index
+  // Find area by attribute value or index
   // e.g { attr: "id", value: "FR-01" }
   // e.g { index: 42 }
   //
-  item: function(options) {
-    var items = $(this).data('items');
+  'area-data': function(options) {
+    var areas = $(this).data('areas');
     if (isDefined(options.index)) {
-      return items[options.index];
+      return areas[options.index];
     } else if (isDefined(options.attr) && isDefined(options.value)) {
-      for (var i = 0; i < items.length; i++) {
-        var obj = items[i];
+      for (var i = 0; i < areas.length; i++) {
+        var obj = areas[i];
         if (obj[options.attr] == options.value) {
           return obj;
         }
@@ -105,7 +107,9 @@ var methods = {
     return undefined;
   },
 
-  set: function(options) {
+  // Set area value and title.
+  //
+  'set-area': function(options) {
     if (isUndefined(options) || isUndefined(options.id)) {
        return this;
     }
@@ -141,18 +145,18 @@ function isDefined(v) {
   return typeof v !== 'undefined';
 }
 
-function loadItems(This, itemsURL) {
+function loadAreas(This, areasURL) {
   $.ajax({
-    url: itemsURL,
+    url: areasURL,
     async: false,
     cache: true,
     dataType: 'json',
     error: function(data) {
-             This.element.html('Could not load items data file.');
+             This.element.html('Could not load areas data file.');
            },
     success: function(data) {
-             This.data('itemsTitle', data.title);
-             This.data('items', data.items);
+             This.data('areasTitle', data.title);
+             This.data('areas', data.areas);
            }
    });
 }
