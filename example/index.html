@@ -11,12 +11,12 @@
 <script>
 $(document).ready(function () {
   $('#map').carte({ mapURL: 'data/france_departements.svg',
-                    itemsURL: 'data/france_departements.json',
+                    areasURL: 'data/france_departements.json',
                     title: 'Carte de France' });
   $('#map').carte('legend', { max: 95 });
   for (var i = 0; i < 96; i++) {
-    var idx = $('#map').carte('item', { index: i }).id;
-    $('#map').carte('set', { id: idx, value: i, title: 'dept ' + i });
+    var idx = $('#map').carte('area-data', { index: i }).id;
+    $('#map').carte('set-area', { id: idx, value: i, title: 'dept ' + i });
   }
 });
 </script>

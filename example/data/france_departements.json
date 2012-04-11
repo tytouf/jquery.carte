@@ -1,6 +1,6 @@
 {
 "title": "Départements",
-"items": [
+"areas": [
   { "id": "FR-01", "numero": "01", "nom": "Ain" },
   { "id": "FR-02", "numero": "02", "nom": "Aisne" },
   { "id": "FR-03", "numero": "03", "nom": "Allier" },
