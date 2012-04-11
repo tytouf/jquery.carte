@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<title>JQuery Carte plugin example</title>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/jquery.xcolor.min.js"></script>
+<script type="text/javascript" src="js/jquery.svg.min.js"></script>
+<script type="text/javascript" src="js/jquery.carte.js"></script>
+
+<script>
+$(document).ready(function () {
+  $('#map').carte({ mapURL: 'data/france_departements.svg',
+                    itemsURL: 'data/france_departements.json',
+                    title: 'Carte de France' });
+  $('#map').carte('legend', { max: 95 });
+  for (var i = 0; i < 96; i++) {
+    var idx = $('#map').carte('item', { index: i }).id;
+    $('#map').carte('set', { id: idx, value: i, title: 'dept ' + i });
+  }
+});
+</script>
+</head>
+<body>
+<div id="map" class="map">
+</div>
+</body>
+</html>
